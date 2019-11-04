@@ -1,0 +1,35 @@
+cluster.name: <logging-prod>
+node.name: <prod-data-2>
+network.host: _site_
+
+transport.port: 9300-9305
+transport.profiles.default.port: 9300-9305
+
+##### "discovery.seed_hosts" is set only master-eligible node #####
+##### check input node list - such as data node, ml node, ingest node, coordinate node #####
+##### Each value should be in the form of host:port or host #####
+##### (where port defaults to the setting transport.profiles.default.port falling back to transport.port if not set) #####
+discovery.seed_hosts: 
+  - 192.168.1.10
+  - 192.168.1.11
+
+##### "cluster.initial_master_nodes" is set every node #####
+cluster.initial_master_nodes: 
+  - master-node-a
+  - master-node-b
+  - master-node-c
+   
+path.data: </var/data/elasticsearch>
+path.logs: </var/log/elasticsearch>
+
+
+xpack.security.audit.enabled: true
+xpack.security.audit.outputs: index
+xpack.security.audit.logfile.events.include: access_denied, access_granted, anonymous_access_denied, authentication_failed, connection_denied, tampered_request, run_as_denied, run_as_granted
+xpack.security.audit.logfile.events.ignore_filters.<policy_name>.users: ["kibana"]
+xpack.security.audit.index.flush_interval: 30s
+xpack.security.audit.index.rollover: daily
+xpack.security.audit.index.events.emit_request_body: true
+xpack.security.audit.index.client.hosts: <host:port>
+xpack.security.audit.index.client.cluster.name: <cluster_name>
+xpack.security.audit.index.client.xpack.security.user: <username:password>
