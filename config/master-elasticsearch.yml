@@ -1,5 +1,7 @@
 cluster.name: <logging-prod>
 node.name: <prod-data-2>
+node.attr.rack_id: rack_one
+cluster.routing.allocation.awareness.attributes: rack_id 
 network.host: _site_
 
 transport.port: 9300-9305
@@ -32,8 +34,14 @@ xpack.monitoring.exporters.<id>.auth.username: remote_monitoring_user
 xpack.monitoring.exporters.<id>.auth.password: YOUR_PASSWORD
 xpack.monitoring.exporters.<id>.ssl.certificate_authorities: [ "/path/to/ca.crt" ]
 
+##### Enabling IP filtering #####
+xpack.security.transport.filter.enabled: true
+xpack.security.transport.filter.allow: [ "192.168.0.1", "192.168.0.2", "192.168.0.3", "192.168.0.4" ]
+xpack.security.transport.filter.deny: _all
+
 ##### Encrypting communications between nodes in a cluster #####
 ##### https://www.elastic.co/guide/en/elasticsearch/reference/7.4/configuring-tls.html#node-certificates #####
+xpack.security.enabled: true
 xpack.security.transport.ssl.enabled: true
 xpack.security.transport.ssl.verification_mode: certificate 
 xpack.security.transport.ssl.keystore.path: certs/${node.name}.p12
@@ -55,3 +63,23 @@ xpack.security.audit.index.events.emit_request_body: true
 xpack.security.audit.index.client.hosts: <host:port>
 xpack.security.audit.index.client.cluster.name: <cluster_name>
 xpack.security.audit.index.client.xpack.security.user: <username:password>
+
+
+index.search.slowlog.threshold.query.warn: 10s
+index.search.slowlog.threshold.query.info: 5s
+index.search.slowlog.threshold.query.debug: 2s
+index.search.slowlog.threshold.query.trace: 500ms
+
+index.search.slowlog.threshold.fetch.warn: 1s
+index.search.slowlog.threshold.fetch.info: 800ms
+index.search.slowlog.threshold.fetch.debug: 500ms
+index.search.slowlog.threshold.fetch.trace: 200ms
+
+index.search.slowlog.level: info
+
+index.indexing.slowlog.threshold.index.warn: 10s
+index.indexing.slowlog.threshold.index.info: 5s
+index.indexing.slowlog.threshold.index.debug: 2s
+index.indexing.slowlog.threshold.index.trace: 500ms
+index.indexing.slowlog.level: info
+index.indexing.slowlog.source: 1000
