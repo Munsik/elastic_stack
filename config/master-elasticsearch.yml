@@ -111,6 +111,7 @@ xpack.security.audit.index.client.xpack.security.user: <username:password>
 
 ##### Slow log #####
 index.search.slowlog.level: info
+index.indexing.slowlog.source: 1000
 index.search.slowlog.threshold.query.warn: 10s
 index.search.slowlog.threshold.query.info: 5s
 index.search.slowlog.threshold.query.debug: 2s
