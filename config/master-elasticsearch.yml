@@ -46,6 +46,23 @@ cluster.initial_master_nodes:
   - master-node-b
   - master-node-c
 
+##### Watcher email notification (outlook) #####
+xpack.notification.email.account.exchange_account.profile: outlook
+xpack.notification.email.account.exchange_account.email_defaults.from: <email address of service account> 
+xpack.notification.email.account.exchange_account.smtp.auth: true
+xpack.notification.email.account.exchange_account.smtp.starttls.enable: true
+xpack.notification.email.account.exchange_account.smtp.host: <your exchange server>
+xpack.notification.email.account.exchange_account.smtp.port: 587
+xpack.notification.email.account.exchange_account.smtp.user: <email address of service account> 
+
+##### Watcher email notification (another mail server) #####
+xpack.notification.email.account.profile: standard
+xpack.notification.email.account.smtp.auth: true
+xpack.notification.email.account.smtp.starttls.enable: true
+xpack.notification.email.account.smtp.host: <>
+xpack.notification.email.account.smtp.port: 25
+xpack.notification.email.account.smtp.user: <>
+xpack.notification.email.account.smtp.secure_password: <>
 
 ##### xpack monitoring remote cluster #####
 xpack.monitoring.enabled: true
@@ -76,6 +93,7 @@ xpack.security.http.ssl.enabled: true
 xpack.security.http.ssl.keystore.path: certs/elastic-certificates.p12 
 xpack.security.http.ssl.truststore.path: certs/elastic-certificates.p12 
 
+##### Setting audit log remote clustr #####
 xpack.security.audit.enabled: true
 xpack.security.audit.outputs: index
 xpack.security.audit.logfile.events.include: access_denied, access_granted, anonymous_access_denied, authentication_failed, connection_denied, tampered_request, run_as_denied, run_as_granted
@@ -87,22 +105,19 @@ xpack.security.audit.index.client.hosts: <host:port>
 xpack.security.audit.index.client.cluster.name: <cluster_name>
 xpack.security.audit.index.client.xpack.security.user: <username:password>
 
-
+##### Slow log #####
+index.search.slowlog.level: info
 index.search.slowlog.threshold.query.warn: 10s
 index.search.slowlog.threshold.query.info: 5s
 index.search.slowlog.threshold.query.debug: 2s
 index.search.slowlog.threshold.query.trace: 500ms
-
 index.search.slowlog.threshold.fetch.warn: 1s
 index.search.slowlog.threshold.fetch.info: 800ms
 index.search.slowlog.threshold.fetch.debug: 500ms
 index.search.slowlog.threshold.fetch.trace: 200ms
 
-index.search.slowlog.level: info
-
+index.indexing.slowlog.level: info
 index.indexing.slowlog.threshold.index.warn: 10s
 index.indexing.slowlog.threshold.index.info: 5s
 index.indexing.slowlog.threshold.index.debug: 2s
 index.indexing.slowlog.threshold.index.trace: 500ms
-index.indexing.slowlog.level: info
-index.indexing.slowlog.source: 1000
