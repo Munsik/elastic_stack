@@ -102,9 +102,17 @@ set_ulimit() {
 	fi
 }
 
-# ********** Setting swap **************
+# ********** Setting swap off**************
 set_swap() {
-	SYSTEM_SWAP=$(sed -n '/swap/p' /etc/fstab | awk '{print $1}')
-	case "$SYSTEM_SWAP" in
-		#)
+	SYSTEM_SWAP=$(sed -n '/swap/p' /etc/fstab | awk '{print $1}') >> $LOGFILE 2>&1
+	if [ $ERROR -ne 0 ]; then
+		echoerror "Could not get swap info in fstab (Error Code: $ERROR)."
+	fi
+	if [[ $SYSTEM_SWAP =~ "#" ]] then;
+		echo "already setting disable swap"
+		exit 1
+	else sed -i '/[^#]/ s/\(^.*swap.*$\)/#\ \1/' /etc/fstab >> $LOGFILE 2>&1
+		echo "setting swap off"
+		exit 1
+	fi
 }
