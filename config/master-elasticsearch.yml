@@ -74,10 +74,14 @@ xpack.monitoring.exporters.<id>.auth.username: remote_monitoring_user
 xpack.monitoring.exporters.<id>.auth.password: YOUR_PASSWORD
 xpack.monitoring.exporters.<id>.ssl.certificate_authorities: [ "/path/to/ca.crt" ]
 
-##### Enabling IP filtering #####
-xpack.security.transport.filter.enabled: true
-xpack.security.transport.filter.allow: [ "192.168.0.1", "192.168.0.2", "192.168.0.3", "192.168.0.4" ]
-xpack.security.transport.filter.deny: _all
+##### IP filtering #####
+# xpack.security.transport.filter.enabled: true
+# xpack.security.transport.filter.allow: [ "192.168.0.1", "192.168.0.2", "192.168.0.3", "192.168.0.4" ]
+# xpack.security.transport.filter.deny: _all
+#
+# xpack.security.http.filter.enabled: true
+# xpack.security.http.filter.allow: 172.16.0.0/16
+# xpack.security.http.filter.deny: _all
 
 ##### Encrypting communications between nodes in a cluster #####
 ##### https://www.elastic.co/guide/en/elasticsearch/reference/7.4/configuring-tls.html#node-certificates #####
@@ -87,7 +91,7 @@ xpack.security.transport.ssl.verification_mode: certificate
 xpack.security.transport.ssl.keystore.path: certs/${node.name}.p12
 xpack.security.transport.ssl.truststore.path: certs/elastic-certificates.p12
 
-##### Encrypting HTTP Client communicationsedit #####
+##### Encrypting HTTP Client communications #####
 ##### set only coordinating node #####
 xpack.security.http.ssl.enabled: true
 xpack.security.http.ssl.keystore.path: certs/elastic-certificates.p12 
