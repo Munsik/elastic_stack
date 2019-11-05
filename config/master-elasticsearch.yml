@@ -1,9 +1,34 @@
+# ======================== Elasticsearch Configuration ========================= #
+
+##### Cluster information #####
 cluster.name: <logging-prod>
-node.name: <prod-data-2>
-node.attr.rack_id: rack_one
 cluster.routing.allocation.awareness.attributes: rack_id 
+cluster.remote.connect: true
+
+##### Node role #####
+node.master: true 
+node.voting_only: false 
+node.data: false 
+node.ingest: false 
+node.ml: false
+
+##### Node information #####
+node.name: <${HOSTNAME}>
+node.attr.rack_id: rack_one
+
+##### Setting local path data/logs #####
+path.data: </var/data/elasticsearch>
+path.logs: </var/log/elasticsearch>
+
+#### Lock the memory on startup #####
+bootstrap.memory_lock: true
+
+##### Setting network information #####
 network.host: _site_
 
+##### Setting custom port for http/transport #####
+http.enabled: false
+http.port: 9200-9205
 transport.port: 9300-9305
 transport.profiles.default.port: 9300-9305
 
@@ -21,15 +46,13 @@ cluster.initial_master_nodes:
   - master-node-b
   - master-node-c
 
-##### Setting local path data/logs #####
-path.data: </var/data/elasticsearch>
-path.logs: </var/log/elasticsearch>
 
 ##### xpack monitoring remote cluster #####
+xpack.monitoring.enabled: true
 xpack.monitoring.collection.enabled: true
 xpack.monitoring.collection.interval: 30s
 xpack.monitoring.exporters.<id>.type: http
-xpack.monitoring.exporters.<id>.host: ["https://es-mon1:9200", "https://es-mon2:9200"]
+xpack.monitoring.exporters.<id>.host: ["https://es-mon1:9200"]
 xpack.monitoring.exporters.<id>.auth.username: remote_monitoring_user
 xpack.monitoring.exporters.<id>.auth.password: YOUR_PASSWORD
 xpack.monitoring.exporters.<id>.ssl.certificate_authorities: [ "/path/to/ca.crt" ]
