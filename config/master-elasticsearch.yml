@@ -24,10 +24,9 @@ path.logs: </var/log/elasticsearch>
 bootstrap.memory_lock: true
 
 ##### Setting network information #####
-network.host: _site_
+network.host: <${HOST_IP}>
 
 ##### Setting custom port for http/transport #####
-http.enabled: false
 http.port: 9200-9205
 transport.port: 9300-9305
 transport.profiles.default.port: 9300-9305
@@ -102,12 +101,7 @@ xpack.security.audit.enabled: true
 xpack.security.audit.outputs: logfile
 xpack.security.audit.logfile.events.include: access_denied, access_granted, anonymous_access_denied, authentication_failed, connection_denied, tampered_request, run_as_denied, run_as_granted
 xpack.security.audit.logfile.events.ignore_filters.<policy_name>.users: ["kibana"]
-xpack.security.audit.index.flush_interval: 30s
-xpack.security.audit.index.rollover: daily
-xpack.security.audit.index.events.emit_request_body: true
-xpack.security.audit.index.client.hosts: <host:port>
-xpack.security.audit.index.client.cluster.name: <cluster_name>
-xpack.security.audit.index.client.xpack.security.user: <username:password>
+
 
 ##### Slow log #####
 index.search.slowlog.level: info
