@@ -46,22 +46,22 @@ cluster.initial_master_nodes:
   - master-node-c
 
 ##### Watcher email notification (outlook) #####
-xpack.notification.email.account.exchange_account.profile: outlook
-xpack.notification.email.account.exchange_account.email_defaults.from: <email address of service account> 
-xpack.notification.email.account.exchange_account.smtp.auth: true
-xpack.notification.email.account.exchange_account.smtp.starttls.enable: true
-xpack.notification.email.account.exchange_account.smtp.host: <your exchange server>
-xpack.notification.email.account.exchange_account.smtp.port: 587
-xpack.notification.email.account.exchange_account.smtp.user: <email address of service account> 
+#xpack.notification.email.account.exchange_account.profile: outlook
+#xpack.notification.email.account.exchange_account.email_defaults.from: <email address of service account> 
+#xpack.notification.email.account.exchange_account.smtp.auth: true
+#xpack.notification.email.account.exchange_account.smtp.starttls.enable: true
+#xpack.notification.email.account.exchange_account.smtp.host: <your exchange server>
+#xpack.notification.email.account.exchange_account.smtp.port: 587
+#xpack.notification.email.account.exchange_account.smtp.user: <email address of service account> 
 
 ##### Watcher email notification (another mail server) #####
 xpack.notification.email.account.profile: standard
 xpack.notification.email.account.smtp.auth: true
-xpack.notification.email.account.smtp.starttls.enable: true
 xpack.notification.email.account.smtp.host: <>
 xpack.notification.email.account.smtp.port: 25
 xpack.notification.email.account.smtp.user: <>
 xpack.notification.email.account.smtp.secure_password: <>
+xpack.notification.email.html.sanitization.allow: _tables, _blocks, _links, _styles
 
 ##### xpack monitoring remote cluster #####
 xpack.monitoring.enabled: true
@@ -102,6 +102,11 @@ xpack.security.audit.outputs: logfile
 xpack.security.audit.logfile.events.include: access_denied, access_granted, anonymous_access_denied, authentication_failed, connection_denied, tampered_request, run_as_denied, run_as_granted
 xpack.security.audit.logfile.events.ignore_filters.<policy_name>.users: ["kibana"]
 
+##### Enabling IP filtering #####
+xpack.security.transport.filter.allow: [ "192.168.0.1", "192.168.0.2", "192.168.0.3", "192.168.0.4" ]
+xpack.security.transport.filter.deny: _all
+xpack.security.http.filter.allow: 172.16.0.0/16
+xpack.security.http.filter.deny: _all
 
 ##### Slow log #####
 index.search.slowlog.level: info
