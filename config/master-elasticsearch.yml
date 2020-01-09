@@ -29,6 +29,7 @@ network.host: <${HOST_IP}>
 ##### Setting custom port for http/transport #####
 http.port: 9200-9205
 transport.port: 9300-9305
+transport.tcp.port : "9300-9400
 transport.profiles.default.port: 9300-9305
 
 ##### "discovery.seed_hosts" is set all node #####
